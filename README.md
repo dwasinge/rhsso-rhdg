@@ -57,6 +57,3 @@ The result will be a ZIP containing the configured distribution and can be found
 | `natives3artifact` | native-s3-ping | Maven artifact name of the native s3 ping library |
 | `natives3version` | 1.0.0.Final | Maven artifact version of the native s3 ping library |
 | `installnatives3ping` | false | Flag to add native s3 ping libraries to data grid |
-
-# debug
-debug=false
