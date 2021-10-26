@@ -12,7 +12,7 @@
                     max_site_masters="1000"/> 
       <remote-sites default-stack="tcp"> 
          <remote-site name="emea"/>
-         <remote-site name="amer"/>
+         <remote-site name="amers"/>
       </remote-sites>
    </stack>
 
@@ -32,42 +32,42 @@
       <transaction mode="NONE" locking="PESSIMISTIC"/>
       <locking acquire-timeout="0" />
         <backups>
-           <backup site="amer" strategy="SYNC" />
+           <backup site="amers" strategy="SYNC" />
       </backups>
    </replicated-cache>
    <distributed-cache name="sessions" mode="SYNC" start="EAGER">
       <transaction mode="NONE" locking="PESSIMISTIC"/>
       <locking acquire-timeout="0" />
       <backups>
-           <backup site="amer" strategy="SYNC" />
+           <backup site="amers" strategy="SYNC" />
       </backups>
    </distributed-cache>
    <distributed-cache name="clientSessions" mode="SYNC" start="EAGER">
       <transaction mode="NONE" locking="PESSIMISTIC"/>
       <locking acquire-timeout="0" />
          <backups>
-           <backup site="amer" strategy="SYNC" />
+           <backup site="amers" strategy="SYNC" />
       </backups>
    </distributed-cache>
    <distributed-cache name="offlineSessions" mode="SYNC" start="EAGER">
       <transaction mode="NONE" locking="PESSIMISTIC"/>
       <locking acquire-timeout="0" />
          <backups>
-           <backup site="amer" strategy="SYNC" />
+           <backup site="amers" strategy="SYNC" />
       </backups>
    </distributed-cache>
    <distributed-cache name="offlineClientSessions" mode="SYNC" start="EAGER">
       <transaction mode="NONE" locking="PESSIMISTIC"/>
       <locking acquire-timeout="0" />
          <backups>
-           <backup site="amer" strategy="SYNC" />
+           <backup site="amers" strategy="SYNC" />
       </backups>
    </distributed-cache>
    <distributed-cache name="actionTokens" mode="SYNC" start="EAGER">
       <transaction mode="NONE" locking="PESSIMISTIC"/>
       <locking acquire-timeout="0" />
               <backups>
-           <backup site="amer" strategy="SYNC" />
+           <backup site="amers" strategy="SYNC" />
       </backups>
 
    </distributed-cache>
@@ -75,7 +75,7 @@
       <transaction mode="NONE" locking="PESSIMISTIC"/>
       <locking acquire-timeout="0" />
               <backups>
-           <backup site="amer" strategy="SYNC" />
+           <backup site="amers" strategy="SYNC" />
       </backups>
    </distributed-cache>
    </cache-container>

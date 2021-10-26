@@ -8,11 +8,11 @@
 
    <jgroups>
    <stack name="xsite" extends="udp"> 
-      <relay.RELAY2 site="amer" 
+      <relay.RELAY2 site="amers" 
                     max_site_masters="1000"/> 
       <remote-sites default-stack="tcp"> 
          <remote-site name="emea"/>
-         <remote-site name="amer"/>
+         <remote-site name="amers"/>
       </remote-sites>
    </stack>
 
