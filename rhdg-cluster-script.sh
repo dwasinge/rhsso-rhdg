@@ -91,7 +91,7 @@ then
 echo "  >>>> Installing AWS EC2 Ping Dependencies <<<< "
 
 # clone s3 ping repo
-git clone git@github.com:jgroups-extras/native-s3-ping.git
+git clone https://github.com/jgroups-extras/native-s3-ping.git
 # checkout configured version
 cd $NATIVE_S3_PING_ARTIFACT
 git checkout $NATIVE_S3_PING_ARTIFACT-$NATIVE_S3_PING_VERSION
