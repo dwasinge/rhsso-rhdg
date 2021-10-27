@@ -74,13 +74,24 @@ unzip $WORK_DIR/$BINARY_FILE_NAME -d $WORK_DIR/
 
 echo "  >>>> ADDING DEFAULT ADMIN USER <<<< "
 
-./$RHDG_HOME/bin/cli.sh user create $ADMIN_USER -p $ADMIN_PASSWORD -g admin
+$RHDG_HOME/bin/cli.sh user create $ADMIN_USER -p $ADMIN_PASSWORD -g admin
 
 echo "  >>>> Replacing server configurations with custom configurations  <<<< "
 
 rm -rf $RHDG_HOME/server/conf/infinispan.xml
 
+if [ $INSTALL_NATIVE_S3_PING == 'true' ];
+then
+
+echo copying configurations/infinispan-$REGION-native-s3-ping.xml to $RHDG_HOME/server/conf/infinispan.xml
+cp configurations/infinispan-$REGION-native-s3-ping.xml $RHDG_HOME/server/conf/infinispan.xml
+
+else
+
+echo copying configurations/infinispan-$REGION.xml to $RHDG_HOME/server/conf/infinispan.xml
 cp configurations/infinispan-$REGION.xml $RHDG_HOME/server/conf/infinispan.xml
+
+fi
 
 # move to working directory
 cd $BASE_DIR/$WORK_DIR
@@ -107,7 +118,7 @@ cd $BASE_DIR/$WORK_DIR
 
 rm $BINARY_FILE_NAME
 
-zip -r ../deliverable/refinitive-rhdg-$REGION.zip $TARGET_WORK_DIR
+zip -r ../deliverable/rhdg-$REGION.zip $TARGET_WORK_DIR
 
 rm -rf $TARGET_WORK_DIR
 rm -rf native-s3-ping
