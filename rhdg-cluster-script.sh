@@ -102,6 +102,10 @@ echo "  >>>> Add startup properties file  <<<< "
 
 cp properties/rhdg-startup.properties $RHDG_HOME/rhdg-startup.properties
 
+echo "  >>>> Add startup scripts  <<<< "
+
+cp -R scripts/init.d $RHDG_HOME/bin/
+
 # move to working directory
 cd $BASE_DIR/$WORK_DIR
 

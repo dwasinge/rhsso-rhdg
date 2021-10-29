@@ -9,6 +9,7 @@ This repository can be used to configure a Red Hat Data Grid or Infinispan distr
 * `deliverables` - contains the final zip distribution after configured
 * `properties` - contains the properties files to configure the script
 * `workingdir` - used during script execution to configure the distribution
+* `scripts` - init.d configuration and service script
 
 # Scripts
 
@@ -57,3 +58,77 @@ The result will be a ZIP containing the configured distribution and can be found
 | `natives3artifact` | native-s3-ping | Maven artifact name of the native s3 ping library |
 | `natives3version` | 1.0.0.Final | Maven artifact version of the native s3 ping library |
 | `installnatives3ping` | false | Flag to add native s3 ping libraries to data grid |
+
+# Running as a Service
+
+## Linux Distributions using systemctl
+
+The `infinispan.service` script can be located in `RHDG_HOME/docs/systemd`.
+
+### Configure service
+
+Set the `INFINISPAN_HOME` environment variable and set the `User`.
+
+### Copy service file to /etc/systemd/system
+
+```
+sudo RHDG_HOME/docs/systemd/infinispan.service /etc/systemd/system
+```
+
+### Load and Start
+
+```
+# reload services in daemon
+systemctl daemon-reload
+
+# Activate
+systemctl start|enable infinispan
+
+# Check status
+systemctl status infinispan
+
+```
+
+## Linux Distributions using init.d
+
+The `infinispan-server.conf` and `infinispan-server.sh` files can be found in the `scripts/init.d` directory of this repository or in the `RHDG_HOME/bin/init.d` directory of the configured distribution created by running `./rhdg-cluster-script.sh`.
+
+### Configure the configuration file `infinispan-server.conf`
+
+```
+# Set to process owner user
+ISPN_SERVER_USER=ec2-user
+
+# Set to Data Grid (Infinispan) installation directory
+ISPN_SERVER_HOME=/home/ec2-user/redhat-datagrid-8.2.1-server
+
+# Set the path of the rhdg-startup.properties in the installation directory
+ISPN_OPTS="-P /home/ec2-user/redhat-datagrid-8.2.1-server/rhdg-startup.properties"
+```
+
+### Copy the configuration file to /etc
+
+```
+sudo cp RHDG_HOME/bin/init.d/infinispan-server.conf /etc/infinispan-server
+```
+
+### Copy the service script to /etc/init.d
+
+```
+# copy the service script
+sudo cp RHDG_HOME/bin/init.d/infinispan-server.sh /etc/init.d
+# set permissions on script file
+sudo chmod +x /etc/init.d/infinispan-server.sh
+```
+
+### Add script to automatically started services
+
+```
+sudo chkconfig --add infinispan-service.sh
+```
+
+### Use service to control the server
+
+```
+sudo service infinispan-service [start|restart|stop|status]
+```
