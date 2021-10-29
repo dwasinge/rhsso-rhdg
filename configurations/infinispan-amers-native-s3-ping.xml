@@ -3,6 +3,12 @@
 
 
    <jgroups>
+
+      <stack name="global-cluster" extends="tcp">
+         <!-- Remove MPING protocol from the stack and add TCPPING -->
+         <TCPPING initial_hosts="${tcpping.initial.hosts:server1[7800],server2[7800]}" stack.combine="REPLACE" stack.position="MPING" />
+      </stack>
+
       <stack name="xsite" extends="ec2">
          <relay.RELAY2 site="amers" max_site_masters="1000" />
          <remote-sites default-stack="global-cluster">
@@ -11,15 +17,9 @@
          </remote-sites>
       </stack>
 
-      <stack name="global-cluster" extends="tcp">
-         <!-- Remove MPING protocol from the stack and add TCPPING -->
-         <TCPPING initial_hosts="${tcpping.initial.hosts:server1[7800],server2[7800]}" stack.combine="REPLACE" stack.position="MPING" />
-      </stack>
    </jgroups>
 
-
    <cache-container name="default" statistics="true">
-      <transport cluster="${infinispan.cluster.name}" stack="${infinispan.cluster.stack:tcp}" node-name="${infinispan.node.name:}" />
       <transport cluster="${infinispan.cluster.name:cluster}" stack="xsite" />
 
       <replicated-cache name="work" mode="SYNC" start="EAGER">

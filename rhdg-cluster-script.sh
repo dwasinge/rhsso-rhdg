@@ -100,7 +100,7 @@ cp configurations/infinispan.service $RHDG_HOME/docs/systemd/infinispan.service
 
 echo "  >>>> Add startup properties file  <<<< "
 
-cp properties/rhdg-startup.properties $RHDG_HOME/rhdg-starup.properties
+cp properties/rhdg-startup.properties $RHDG_HOME/rhdg-startup.properties
 
 # move to working directory
 cd $BASE_DIR/$WORK_DIR
